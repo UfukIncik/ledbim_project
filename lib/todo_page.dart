@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ToDoPage extends StatefulWidget {
+  const ToDoPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ToDoPage> createState() => _ToDoPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ToDoPageState extends State<ToDoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HomePage"),
+        title: const Text("ToDoPage"),
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("HomePage")
+          Text("ToDoPage")
           ],
         ),
     );
