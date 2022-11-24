@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ledbim_project/bottom_nav_bar_pages.dart';
-import 'package:ledbim_project/homepage.dart';
-import 'package:ledbim_project/login_screen.dart';
-import 'package:ledbim_project/todo_page.dart';
+import 'package:ledbim_project/Pages/bottom_nav_bar_pages.dart';
+import 'package:ledbim_project/Pages/homepage.dart';
+import 'package:ledbim_project/Pages/login_screen.dart';
+import 'package:ledbim_project/Pages/todo_page.dart';
 
 void main() {
   runApp(const MyApp());
