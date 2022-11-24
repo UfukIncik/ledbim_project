@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:ledbim_project/bottom_nav_bar_pages.dart';
 import 'package:ledbim_project/homepage.dart';
+import 'package:ledbim_project/login_screen.dart';
 import 'package:ledbim_project/todo_page.dart';
 
 void main() {
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Ledbim'),
+      home: const LoginDemo(),
     );
   }
 }
@@ -29,34 +33,10 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex=0;
-  final screens = [
-    const HomePage(),
-    const ToDoPage(),
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: screens[currentIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
-        backgroundColor: Colors.blue,
-        selectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.today_outlined),
-              label: "ToDo",
-          ),
-        ],
-      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
