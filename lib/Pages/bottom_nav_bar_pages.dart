@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ledbim_project/Pages/homepage.dart';
+import 'package:ledbim_project/Pages/login_screen.dart';
 import 'package:ledbim_project/Pages/todo_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String? finalEmail;
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({Key? key}) : super(key: key);
@@ -13,11 +19,27 @@ class BottomNavBarPage extends StatefulWidget {
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
+
+@override
+  void initState(){
+getValidationData().whenComplete(() async{
+  Timer(Duration(seconds: 2),() => Get.to(finalEmail == null ? LoginDemo() : BottomNavBarPage()));
+});
+}
+
 int currentIndex=0;
   final screens = [
     const HomePage(),
     const ToDoPage(),
   ];
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedEmail = sharedPreferences.getString("email");
+    setState(() {
+      finalEmail = obtainedEmail!;
+    });    
+  }
 
   @override
   Widget build(BuildContext context) {

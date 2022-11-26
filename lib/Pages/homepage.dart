@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ledbim_project/Pages/login_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -26,9 +27,10 @@ class _HomePageState extends State<HomePage> {
               Icons.exit_to_app,
               color: Colors.white,
             ),
-            onPressed: (){
-              Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => LoginDemo()));
+            onPressed: () async{
+              final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+              sharedPreferences.remove("email");
+                  Get.to(() => LoginDemo());//Getx
             })
         ],
       ),

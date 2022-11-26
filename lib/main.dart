@@ -8,6 +8,7 @@ import 'package:ledbim_project/Pages/homepage.dart';
 import 'package:ledbim_project/Pages/login_screen.dart';
 import 'package:ledbim_project/Pages/todo_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() {
@@ -18,12 +19,12 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Ledbim',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginDemo(),
+      home: BottomNavBarPage(),
     );
   }
 }

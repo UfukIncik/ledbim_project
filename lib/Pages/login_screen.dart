@@ -7,17 +7,21 @@ import 'package:ledbim_project/Pages/bottom_nav_bar_pages.dart';
 import 'package:ledbim_project/Pages/homepage.dart';
 import 'package:ledbim_project/main.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class LoginDemo extends StatefulWidget {
-  const LoginDemo({Key? key}) : super(key: key);
+  LoginDemo({Key? key}) : super(key: key);
 
   @override
   _LoginDemoState createState() => _LoginDemoState();
 }
 
 class _LoginDemoState extends State<LoginDemo> {
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,23 +42,26 @@ class _LoginDemoState extends State<LoginDemo> {
               ),
             ),
             Text("Welcome to Ledbim",style: TextStyle(fontSize: 30),),
+
             SizedBox(height: 25),
+            
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
                     hintText: 'Enter valid email id as abc@gmail.com'),
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -62,6 +69,7 @@ class _LoginDemoState extends State<LoginDemo> {
                     hintText: 'Enter secure password'),
               ),
             ),
+
             TextButton(
               onPressed: (){
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
@@ -71,15 +79,17 @@ class _LoginDemoState extends State<LoginDemo> {
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
             ),
+
             Container(
               height: 50,
               width: 250,
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => BottomNavBarPage()));
+                onPressed: () async {
+                  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                  sharedPreferences.setString("email", emailController.text);
+                  Get.to(() => BottomNavBarPage());//Getx
                 },
                 child: Text(
                   'Login',
@@ -87,9 +97,11 @@ class _LoginDemoState extends State<LoginDemo> {
                 ),
               ),
             ),
+
             SizedBox(
               height: 130,
             ),
+
             Text('New User? Create Account')
           ],
         ),
