@@ -68,7 +68,7 @@ class _ToDoPageState extends State<ToDoPage> {
                   child: TextField(
                     controller: _todoController,
                     decoration: InputDecoration(
-                        hintText: "Add a new ToDo Item",
+                        hintText: "  Add a new ToDo Item",
                         border: InputBorder.none),
                   ),
                 ),
