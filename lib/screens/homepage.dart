@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ledbim_project/model/users_model.dart';
 import 'package:ledbim_project/screens/login_screen.dart';
+import 'package:ledbim_project/service/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -16,6 +18,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final UserService _service = UserService();
+  List<UsersModelData?> users = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _service.fetchUsers().then((value){
+      if(value != null && value.data != null){
+        setState(() {
+          users = value.data!;
+        });
+      }
+      else{
+        
+      }
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +56,18 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text("HomePage")
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: users.length,
+        itemBuilder: (context, index){
+          return ListTile(
+            title: Text(users[index]!.firstName! + users[index]!.lastName!),
+            subtitle: Text(users[index]!.email!),
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(users[index]!.avatar!),
+            ),
+          );
+        }
+      )
     );
   }
 }
