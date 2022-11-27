@@ -9,7 +9,6 @@ import 'package:ledbim_project/screens/login_screen.dart';
 import 'package:ledbim_project/service/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,22 +18,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final UserService _service = UserService();
+  bool? isLoading;
+
   List<UsersModelData?> users = [];
 
   @override
   void initState() {
     super.initState();
-    _service.fetchUsers().then((value){
-      if(value != null && value.data != null){
+    _service.fetchUsers().then((value) {
+      if (value != null && value.data != null) {
         setState(() {
           users = value.data!;
+          isLoading = true;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
         });
       }
-      else{
-        
-      }
     });
-
   }
 
   @override
@@ -44,30 +46,38 @@ class _HomePageState extends State<HomePage> {
         title: const Text("HomePage"),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.exit_to_app,
-              color: Colors.white,
-            ),
-            onPressed: () async{
-              final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-              sharedPreferences.remove('email');
-                  Get.to(() => LoginDemo());//Getx
-            })
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              onPressed: () async {
+                final SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                sharedPreferences.remove('email');
+                Get.to(() => LoginDemo()); //Getx
+              })
         ],
       ),
-      
-      body: ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index){
-          return ListTile(
-            title: Text(users[index]!.firstName! + users[index]!.lastName!),
-            subtitle: Text(users[index]!.email!),
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(users[index]!.avatar!),
-            ),
-          );
-        }
-      )
+      body: isLoading == null
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : isLoading == true
+              ? ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                          users[index]!.firstName! + users[index]!.lastName!),
+                      subtitle: Text(users[index]!.email!),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(users[index]!.avatar!),
+                      ),
+                    );
+                  })
+              : Center(
+                  child: Text("An Error Occured.."),
+                ),
     );
   }
 }
