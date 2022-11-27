@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ledbim_project/Pages/login_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ledbim_project/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () async{
               final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-              sharedPreferences.remove("email");
+              sharedPreferences.remove('email');
                   Get.to(() => LoginDemo());//Getx
             })
         ],

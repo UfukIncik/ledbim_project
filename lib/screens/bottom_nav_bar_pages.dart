@@ -1,12 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ledbim_project/Pages/homepage.dart';
-import 'package:ledbim_project/Pages/login_screen.dart';
-import 'package:ledbim_project/Pages/todo_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ledbim_project/screens/homepage.dart';
+import 'package:ledbim_project/screens/login_screen.dart';
+import 'package:ledbim_project/screens/todo_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String? finalEmail;
@@ -23,7 +25,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 @override
   void initState(){
 getValidationData().whenComplete(() async{
-  Timer(Duration(seconds: 2),() => Get.to(finalEmail == null ? LoginDemo() : BottomNavBarPage()));
+  Timer(Duration(seconds: 2),() => Get.to(() =>finalEmail == null ? LoginDemo() : BottomNavBarPage()));
 });
 }
 
