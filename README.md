@@ -4,15 +4,19 @@ A Flutter project
 
 ## Installation
 
-Use the libraries mentioned below:
+Use the libraries mentioned following:
+
 [Flutter Secure Storage]([https://pip.pypa.io/en/stable/](https://pub.dev/packages/flutter_secure_storage)) to install flutter secure storage.
-[GetX](https://pub.dev/packages/get) to install GetX state manager
+
+[GetX](https://pub.dev/packages/get) to install GetX state manager.
+
 [HTTP](https://pub.dev/packages/http) for fetching infos from [regres.in](https://reqres.in).
 
-
 ## Getting Started
+Design a BottomNavigation
 
-This project is a starting point for a Flutter application.
+Create a exit IconButton in AppBar
+
 
 A few resources to get you started if this is your first Flutter project:
 
