@@ -1,6 +1,14 @@
 # ledbim_project
 
-A new Flutter project.
+A Flutter project 
+
+## Installation
+
+Use the libraries mentioned below:
+[Flutter Secure Storage]([https://pip.pypa.io/en/stable/](https://pub.dev/packages/flutter_secure_storage)) to install flutter secure storage.
+[GetX](https://pub.dev/packages/get) to install GetX state manager
+[HTTP](https://pub.dev/packages/http) for fetching infos from [regres.in](https://reqres.in).
+
 
 ## Getting Started
 
@@ -14,3 +22,5 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
