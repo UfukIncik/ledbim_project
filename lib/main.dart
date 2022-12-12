@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:ledbim_project/screens/bottom_nav_bar_pages.dart';
 
 
-
 void main() {
   runApp(const MyApp());
 }

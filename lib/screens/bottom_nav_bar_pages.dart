@@ -23,7 +23,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 @override
   void initState(){
 getValidationData().whenComplete(() async{
-  Timer(Duration(seconds: 2),() => Get.to(() =>finalEmail == null ? LoginDemo() : BottomNavBarPage()));
+  Get.to(() =>finalEmail == null ? LoginDemo() : BottomNavBarPage());
 });
 }
 

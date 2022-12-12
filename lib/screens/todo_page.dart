@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../Model/todo.dart';
 import '../Widget/todo_item.dart';
 import '../screens/login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ToDoPage extends StatefulWidget {
   const ToDoPage({Key? key}) : super(key: key);
@@ -79,10 +76,6 @@ class _ToDoPageState extends State<ToDoPage> {
                   right: 20,
                 ),
                 child: ElevatedButton(
-                  child: Text(
-                    "+",
-                    style: TextStyle(fontSize: 40),
-                  ),
                   onPressed: () {
                     _addToDoItem(_todoController.text);
                   },
@@ -90,6 +83,10 @@ class _ToDoPageState extends State<ToDoPage> {
                     primary: Colors.blue,
                     minimumSize: Size(60, 60),
                     elevation: 10,
+                  ),
+                  child: Text(
+                    "+",
+                    style: TextStyle(fontSize: 40),
                   ),
                 ),
               )
