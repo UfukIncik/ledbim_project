@@ -23,23 +23,15 @@ class _ToDoPageState extends State<ToDoPage> {
       appBar: _buildAppBar(context),
       body: Stack(
         children: [
-          ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 50, bottom: 20),
-                child: Text(
-                  "All ToDos",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-                ),
-              ),
-              for (ToDo todoo in todosList)
-                ToDoItem(
-                  todo: todoo,
+          ListView.builder(
+              itemCount: todosList.length,
+              itemBuilder: (context, index) {
+                return ToDoItem(
+                  todo: todosList[index],
                   onToDoChange: _handleToDoChange,
                   onDeleteItem: _deleteToDoItem,
-                ),
-            ],
-          ),
+                );
+              }),
           Align(
             alignment: Alignment.bottomCenter,
             child: Row(children: [
@@ -115,22 +107,23 @@ class _ToDoPageState extends State<ToDoPage> {
     );
   }
 
-
   void _handleToDoChange(ToDo todo) {
     setState(() {
       todo.isDone = !todo.isDone;
     });
   }
 
-  void _deleteToDoItem(String id){
+  void _deleteToDoItem(String id) {
     setState(() {
-    todosList.removeWhere((item) => item.id == id);
+      todosList.removeWhere((item) => item.id == id);
     });
   }
 
-  void _addToDoItem(String toDo){
+  void _addToDoItem(String toDo) {
     setState(() {
-    todosList.add(ToDo(id: DateTime.now().millisecondsSinceEpoch.toString(), toDoText: toDo));
+      todosList.add(ToDo(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          toDoText: toDo));
     });
     _todoController.clear();
   }
