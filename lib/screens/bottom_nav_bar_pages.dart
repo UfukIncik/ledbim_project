@@ -10,8 +10,6 @@ import 'package:ledbim_project/screens/todo_page.dart';
 import 'package:ledbim_project/service/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String? finalEmail;
-
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({Key? key}) : super(key: key);
 
@@ -20,25 +18,24 @@ class BottomNavBarPage extends StatefulWidget {
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
-  final SecureStorage secureStorage = SecureStorage();
-
-  @override
-  void initState() {
-    getValidationData().whenComplete(() async {
-      Get.to(() => finalEmail == null ? LoginDemo() : BottomNavBarPage());
-    });
-  }
-
+  String? finalEmail;
   int currentIndex = 0;
+  final SecureStorage secureStorage = SecureStorage();
   final screens = [
     const HomePage(),
     const ToDoPage(),
   ];
-
-  Future getValidationData() async {
+  @override
+  void initState() {
+    super.initState();
     secureStorage.readSecureData('email').then((value) {
       finalEmail = value;
+      print(finalEmail);
     });
+    Timer(
+        Duration(milliseconds: 1),
+        () => Get.to(
+            () => finalEmail == null ? LoginDemo() : BottomNavBarPage()));
   }
 
   @override

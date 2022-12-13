@@ -83,6 +83,7 @@ class _LoginDemoState extends State<LoginDemo> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
+                  //print(emailController.text);
                   secureStorage.writeSecureData('email', emailController.text);
                   // final SharedPreferences sharedPreferences =
                   //     await SharedPreferences.getInstance();
