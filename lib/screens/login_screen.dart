@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ledbim_project/screens/bottom_nav_bar_pages.dart';
+import 'package:ledbim_project/service/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginDemo extends StatefulWidget {
   LoginDemo({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class LoginDemo extends StatefulWidget {
 class _LoginDemoState extends State<LoginDemo> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final SecureStorage secureStorage = SecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +83,11 @@ class _LoginDemoState extends State<LoginDemo> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  final SharedPreferences sharedPreferences =
-                      await SharedPreferences.getInstance();
-                  sharedPreferences.setString('email', emailController.text);
-                  Get.to(() => BottomNavBarPage());//Getx
+                  secureStorage.writeSecureData('email', emailController.text);
+                  // final SharedPreferences sharedPreferences =
+                  //     await SharedPreferences.getInstance();
+                  // sharedPreferences.setString('email', emailController.text);
+                  Get.to(() => BottomNavBarPage()); //Getx
                 },
                 child: Text(
                   'Login',

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 class UserService{
   final String url = "https://reqres.in/api/users?page=2";
+
   Future<UsersModel?> fetchUsers() async{
     var res = await http.get(Uri.parse(url));
     if(res.statusCode==200){

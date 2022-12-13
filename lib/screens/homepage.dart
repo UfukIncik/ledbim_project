@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ledbim_project/model/users_model.dart';
 import 'package:ledbim_project/screens/login_screen.dart';
+import 'package:ledbim_project/service/storage.dart';
 import 'package:ledbim_project/service/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final UserService _service = UserService();
   bool? isLoading;
+  final SecureStorage secureStorage = SecureStorage();
 
   List<UsersModelData?> users = [];
 
@@ -49,9 +51,11 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                final SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.remove('email');
+                secureStorage.deleteSecureData('email');
+
+                // final SharedPreferences sharedPreferences =
+                //     await SharedPreferences.getInstance();
+                // sharedPreferences.remove('email');
                 Get.to(() => LoginDemo()); //Getx
               })
         ],
