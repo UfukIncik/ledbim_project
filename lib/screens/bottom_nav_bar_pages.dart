@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ledbim_project/screens/homepage.dart';
@@ -25,12 +24,12 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     const HomePage(),
     const ToDoPage(),
   ];
+
   @override
   void initState() {
     super.initState();
     secureStorage.readSecureData('email').then((value) {
       finalEmail = value;
-      print(finalEmail);
     });
     Timer(
         Duration(milliseconds: 1),
